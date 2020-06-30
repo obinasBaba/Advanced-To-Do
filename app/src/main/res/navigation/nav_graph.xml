@@ -19,23 +19,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/taskFragmentHome2">
+    app:startDestination="@id/navHome">
 
     <argument
         android:name="userMessage"
         android:defaultValue="0" />
     <fragment
-        android:id="@+id/taskFragmentHome2"
+        android:id="@+id/navHome"
         android:name="com.hfad.doodad.TaskFragmentHome"
         android:label="fragment_task_home"
         tools:layout="@layout/fragment_task_home" >
         <action
             android:id="@+id/action_taskFragmentHome2_to_taskDetailFrag2"
-            app:destination="@id/taskDetailFrag2" />
+            app:destination="@id/navDetail" />
+        <action
+            android:id="@+id/action_taskFragmentHome2_to_taskStatisticsFrag"
+            app:destination="@id/navStatistics" />
     </fragment>
     <fragment
-        android:id="@+id/taskDetailFrag2"
+        android:id="@+id/navDetail"
         android:name="com.hfad.doodad.TaskDetailFrag"
         android:label="fragment_task_detail"
         tools:layout="@layout/fragment_task_detail" />
+    <fragment
+        android:id="@+id/navStatistics"
+        android:name="com.hfad.doodad.TaskStatisticsFrag"
+        android:label="fragment_task_statistics"
+        tools:layout="@layout/fragment_task_statistics" >
+        <action
+            android:id="@+id/action_taskStatisticsFrag_to_taskFragmentHome2"
+            app:destination="@id/navHome" />
+    </fragment>
 </navigation>

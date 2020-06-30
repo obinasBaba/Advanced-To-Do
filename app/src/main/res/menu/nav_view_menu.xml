@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navHome"
+        android:title="home"
+        android:visible="true" />
+    <item
+        android:id="@+id/navStatistics"
+        android:title="statistics"
+        android:visible="true" />
+
+</menu>
