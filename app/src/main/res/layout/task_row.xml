@@ -1,0 +1,59 @@
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="task"
+            type="com.hfad.doodad.dataLayer.database.Task" />
+        <variable
+            name="viewModel"
+            type="com.hfad.doodad.HomeViewModel" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <EditText
+            android:id="@+id/title"
+            style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="37dp"
+            android:layout_marginEnd="32dp"
+            android:autofillHints="Body"
+            android:hint="Body"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/body"
+            tools:ignore="HardcodedText" />
+
+        <EditText
+            android:id="@+id/body"
+            style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="37dp"
+            android:layout_marginEnd="32dp"
+            android:autofillHints=""
+            android:background="#E4E2E6"
+            android:hint="Title"
+            android:inputType="text"
+            android:textColor="#100223"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

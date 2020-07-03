@@ -21,12 +21,12 @@ import kotlin.coroutines.suspendCoroutine
 private const val TAG = "log"
 class TaskFragmentHome : Fragment() {
 
-    val viewModel : HomeViewModel by viewModels()
+    private val viewModel : HomeViewModel by viewModels( {this}, {getViewModelFactory()} )
     lateinit var binding : FragmentTaskHomeBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View?
-    {
-        // Inflate the layout for this fragment
+                              savedInstanceState: Bundle?): View? {
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_task_home, container, false)
         return binding.root
     }

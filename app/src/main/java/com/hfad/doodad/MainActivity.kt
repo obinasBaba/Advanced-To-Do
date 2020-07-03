@@ -26,17 +26,13 @@ class MainActivity : AppCompatActivity() {
          drawerLayout = findViewById ( R.id.drawer_layout)
          navigationView = findViewById (R.id.navigation_view)
 
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navHome,
-                R.id.navStatistics
-            ), drawerLayout
-        )
 
-        NavigationUI.setupWithNavController(navigationView, navController)
+        appBarConfiguration = AppBarConfiguration.Builder(
+            R.id.taskFragmentHome,
+            R.id.taskStatisticsFrag).setOpenableLayout(drawerLayout) .build()
+
         setupActionBarWithNavController(navController,appBarConfiguration)
         navigationView.setupWithNavController(navController)
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
