@@ -2,17 +2,18 @@ package com.hfad.doodad.dataLayer
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
-import com.hfad.doodad.dataLayer.Result.Error
-import com.hfad.doodad.dataLayer.Result.Success
+import com.hfad.doodad.model.Result.Error
+import com.hfad.doodad.model.Result.Success
 import com.hfad.doodad.dataLayer.database.Task
 import com.hfad.doodad.dataLayer.database.TaskDao
+import com.hfad.doodad.model.Result
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 
 
 class LocalDataSource(private val dataBase : TaskDao ) : TaskRepository{
 
-    override fun observeAll(): LiveData< Result<List<Task>> > {
+    override fun observeAll(): LiveData<Result<List<Task>>> {
         return dataBase.observeAll().map {
             Success(it)  //wrapping it with Result
         }

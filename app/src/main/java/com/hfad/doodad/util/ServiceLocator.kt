@@ -1,4 +1,4 @@
-package com.hfad.doodad
+package com.hfad.doodad.util
 
 import android.app.Application
 import com.hfad.doodad.dataLayer.LocalDataSource
@@ -16,7 +16,9 @@ object ServiceLocator
 
     fun provideTasksRepository( ctx: Application ) : TaskRepository {
        return synchronized(this   ){
-            taskRepository  ?: LocalDataSource(getDataBase( ctx )).apply {
+            taskRepository ?: LocalDataSource(
+                getDataBase(ctx)
+            ).apply {
                 taskRepository = this
             }
         }

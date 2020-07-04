@@ -1,4 +1,4 @@
-package com.hfad.doodad.dataLayer
+package com.hfad.doodad.model
 
 sealed class Result<out T> {
     data class Success<T>(val data: T) : Result<T>()

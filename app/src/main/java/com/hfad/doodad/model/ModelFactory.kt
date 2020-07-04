@@ -1,11 +1,11 @@
-package com.hfad.doodad
+package com.hfad.doodad.model
 
-import android.app.Application
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.hfad.doodad.dataLayer.TaskRepository
+import com.hfad.doodad.ui.editAdd.EditAddViewModel
 import java.lang.IllegalArgumentException
 
 @Suppress("UNCHECKED_CAST")
@@ -18,6 +18,9 @@ class ModelFactory(owner : Fragment,private val repository: TaskRepository) : Ab
                 isAssignableFrom(HomeViewModel::class.java) -> {
                     HomeViewModel(handle, repository)
                 }
+                isAssignableFrom(EditAddViewModel::class.java) -> {
+                    EditAddViewModel(repository)
+                }
                 else -> throw IllegalArgumentException(" THIS IS ILLEGAL &&&&&&&")
             }
         } as T
@@ -25,4 +28,7 @@ class ModelFactory(owner : Fragment,private val repository: TaskRepository) : Ab
 }
 
 fun Fragment.getViewModelFactory() : ModelFactory =
-    ModelFactory(this,( requireActivity().applicationContext as ToDoApplication).taskRepository)
+    ModelFactory(
+        this,
+        (requireActivity().applicationContext as ToDoApplication).taskRepository
+    )

@@ -1,4 +1,4 @@
-package com.hfad.doodad
+package com.hfad.doodad.ui
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -8,6 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 import com.google.android.material.navigation.NavigationView
+import com.hfad.doodad.R
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,16 +24,18 @@ class MainActivity : AppCompatActivity() {
 
 
         navController = findNavController(R.id.navHostFragment)
-         drawerLayout = findViewById ( R.id.drawer_layout)
+         drawerLayout = findViewById (R.id.drawer_layout)
          navigationView = findViewById (R.id.navigation_view)
 
 
         appBarConfiguration = AppBarConfiguration.Builder(
             R.id.taskFragmentHome,
-            R.id.taskStatisticsFrag).setOpenableLayout(drawerLayout) .build()
+            R.id.taskStatisticsFrag
+        ).setOpenableLayout(drawerLayout) .build()
 
         setupActionBarWithNavController(navController,appBarConfiguration)
         navigationView.setupWithNavController(navController)
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

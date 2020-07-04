@@ -3,10 +3,11 @@ package com.hfad.doodad.dataLayer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hfad.doodad.dataLayer.database.Task
+import com.hfad.doodad.model.Result
 
 abstract class RemoteDataSource : TaskRepository{
 
-    private val dummyLiveData1 = MutableLiveData< Result<Task>>()
+    private val dummyLiveData1 = MutableLiveData<Result<Task>>()
         private val dummyLiveData2 = Result.Loading
 
     override fun observeAll(): LiveData<Result<List<Task>>> {

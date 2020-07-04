@@ -1,4 +1,4 @@
-package com.hfad.doodad
+package com.hfad.doodad.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,10 +7,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hfad.doodad.dataLayer.database.Task
 import com.hfad.doodad.databinding.TaskRowBinding
+import com.hfad.doodad.model.HomeViewModel
 
-class ListAdapter( private val viewModel: HomeViewModel ) : ListAdapter<Task, com.hfad.doodad.ListAdapter.TaskViewHolder>(DIFF_UTIL) {
+class ListAdapter( private val viewModel: HomeViewModel) : ListAdapter<Task, com.hfad.doodad.ui.ListAdapter.TaskViewHolder>(
+    DIFF_UTIL
+) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):  TaskViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
       return TaskViewHolder.from(parent)
     }
 
@@ -31,7 +34,7 @@ class ListAdapter( private val viewModel: HomeViewModel ) : ListAdapter<Task, co
             fun from(parent: ViewGroup): TaskViewHolder {
                 val taskBinding = TaskRowBinding.inflate(LayoutInflater.from(parent.context),
                     parent, false)
-                return TaskViewHolder(taskBinding )
+                return TaskViewHolder(taskBinding)
             }
         }
     }

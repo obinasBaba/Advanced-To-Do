@@ -1,7 +1,7 @@
-package com.hfad.doodad
+package com.hfad.doodad.model
 
 import android.app.Application
-import com.hfad.doodad.dataLayer.LocalDataSource
+import com.hfad.doodad.util.ServiceLocator
 
 class ToDoApplication : Application() {
 

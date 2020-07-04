@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/taskDetailFrag"
-        android:name="com.hfad.doodad.TaskDetailFrag"
+        android:name="com.hfad.doodad.ui.TaskDetailFrag"
         android:label="fragment_task_detail"
         tools:layout="@layout/fragment_task_detail" />
     <fragment
         android:id="@+id/taskFragmentHome"
-        android:name="com.hfad.doodad.TaskFragmentHome"
+        android:name="com.hfad.doodad.ui.TaskFragmentHome"
         android:label="TaskFragmentHome" >
         <action
             android:id="@+id/action_taskFragmentHome_to_taskDetailFrag"
@@ -20,10 +20,26 @@
         <action
             android:id="@+id/action_taskFragmentHome_to_taskStatisticsFrag"
             app:destination="@id/taskStatisticsFrag" />
+        <action
+            android:id="@+id/action_taskFragmentHome_to_addEditTaskFragment"
+            app:destination="@id/EditAddTaskFragment" />
     </fragment>
     <fragment
         android:id="@+id/taskStatisticsFrag"
-        android:name="com.hfad.doodad.TaskStatisticsFrag"
+        android:name="com.hfad.doodad.ui.TaskStatisticsFrag"
         android:label="fragment_task_statistics"
         tools:layout="@layout/fragment_task_statistics" />
+    <fragment
+        android:id="@+id/EditAddTaskFragment"
+        android:name="com.hfad.doodad.ui.editAdd.AddEditTaskFragment"
+        android:label="fragment_add_edit_task"
+        tools:layout="@layout/fragment_add_edit_task" >
+        <action
+            android:id="@+id/action_addEditTaskFragment_to_taskFragmentHome"
+            app:destination="@id/taskFragmentHome" />
+        <argument
+            android:name="taskId"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>

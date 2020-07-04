@@ -2,6 +2,7 @@ package com.hfad.doodad.dataLayer
 
 import androidx.lifecycle.LiveData
 import com.hfad.doodad.dataLayer.database.Task
+import com.hfad.doodad.model.Result
 
 /** gate way to dataLayer */
 interface TaskRepository {
