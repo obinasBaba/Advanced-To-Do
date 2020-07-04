@@ -27,8 +27,3 @@ class ModelFactory(owner : Fragment,private val repository: TaskRepository) : Ab
     }
 }
 
-fun Fragment.getViewModelFactory() : ModelFactory =
-    ModelFactory(
-        this,
-        (requireActivity().applicationContext as ToDoApplication).taskRepository
-    )

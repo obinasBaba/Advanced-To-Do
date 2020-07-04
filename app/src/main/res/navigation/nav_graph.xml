@@ -9,7 +9,11 @@
         android:id="@+id/taskDetailFrag"
         android:name="com.hfad.doodad.ui.TaskDetailFrag"
         android:label="fragment_task_detail"
-        tools:layout="@layout/fragment_task_detail" />
+        tools:layout="@layout/fragment_task_detail" >
+        <argument
+            android:name="TaskId"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/taskFragmentHome"
         android:name="com.hfad.doodad.ui.TaskFragmentHome"
@@ -23,6 +27,10 @@
         <action
             android:id="@+id/action_taskFragmentHome_to_addEditTaskFragment"
             app:destination="@id/EditAddTaskFragment" />
+        <argument
+            android:name="userMsg"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/taskStatisticsFrag"

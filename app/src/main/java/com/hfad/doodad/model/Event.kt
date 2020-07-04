@@ -3,8 +3,8 @@ package com.hfad.doodad.model
 import androidx.lifecycle.Observer
 
 class Event<T>(val data: T) {
-    var observed = false
-        private set
+    private var observed = false
+
 
     fun observeIfNotAlready(): T? {
         return if (observed) null
