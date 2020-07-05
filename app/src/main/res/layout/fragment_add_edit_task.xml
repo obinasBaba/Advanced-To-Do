@@ -1,19 +1,69 @@
-<layout xmlns:tools="http://schemas.android.com/tools">
 
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewmodel"
+            type="com.hfad.doodad.ui.editAdd.EditAddViewModel" />
+    </data>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.editAdd.AddEditTaskFragment">
+        android:layout_height="match_parent">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <com.hfad.doodad.ui.SwipeToRefresh
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/ADD_EDIT" />
+            android:id="@+id/refresh_layout">
 
-    </FrameLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:padding="15dp"
+                android:layout_height="wrap_content">
 
+                <EditText
+                    android:id="@+id/add_task_title_edit_text"
+                    android:background="#E3DFE8"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:hint="@string/title_hint"
+                    android:maxLines="1"
+                    android:onTitleChange="@{viewmodel._title}"
+                    android:text="@{viewmodel.title}"
+                    android:textStyle="bold"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:autofillHints=""
+                    android:inputType="textAutoComplete" />
+
+                <EditText
+                    android:id="@+id/add_task_description_edit_text"
+                    android:background="#8DE1E1E1"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:gravity="top"
+                    android:onBodyChange="@{viewmodel._body}"
+                    android:text="@{viewmodel.body}"
+                    android:layout_marginTop="4dp"
+                    android:hint="@string/description_hint"
+                    android:inputType="text"
+                    android:autofillHints="" />
+
+            </LinearLayout>
+        </com.hfad.doodad.ui.SwipeToRefresh>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/save_task_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_done"
+            app:fabSize="normal"
+            android:onClick="@{() -> viewmodel.onDoneClicked()}"
+            app:layout_anchor="@id/refresh_layout"
+            app:layout_anchorGravity="bottom|right|end" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

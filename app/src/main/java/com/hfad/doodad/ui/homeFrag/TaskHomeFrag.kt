@@ -1,4 +1,4 @@
-package com.hfad.doodad.ui
+package com.hfad.doodad.ui.homeFrag
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,14 +8,15 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.hfad.doodad.R
 import com.hfad.doodad.databinding.FragmentTaskHomeBinding
 import com.hfad.doodad.model.EventObserver
-import com.hfad.doodad.model.HomeViewModel
+import com.hfad.doodad.ui.ListAdapter
+import com.hfad.doodad.ui.TaskFragmentHomeArgs
+import com.hfad.doodad.ui.TaskFragmentHomeDirections
 
 import com.hfad.doodad.util.getViewModelFactory
 import com.hfad.doodad.util.showSnackBar

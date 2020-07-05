@@ -8,13 +8,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.hfad.doodad.model.HomeViewModel" />
+            type="com.hfad.doodad.ui.homeFrag.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.TaskFragmentHome">
+        tools:context=".ui.homeFrag.TaskFragmentHome">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/task_list"
@@ -29,7 +29,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/home_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#110D17"

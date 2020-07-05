@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/taskDetailFrag"
-        android:name="com.hfad.doodad.ui.TaskDetailFrag"
+        android:name="com.hfad.doodad.ui.taskDetailPreview.TaskDetailFrag"
         android:label="fragment_task_detail"
         tools:layout="@layout/fragment_task_detail" >
         <argument
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/taskFragmentHome"
-        android:name="com.hfad.doodad.ui.TaskFragmentHome"
+        android:name="com.hfad.doodad.ui.homeFrag.TaskFragmentHome"
         android:label="TaskFragmentHome" >
         <action
             android:id="@+id/action_taskFragmentHome_to_taskDetailFrag"

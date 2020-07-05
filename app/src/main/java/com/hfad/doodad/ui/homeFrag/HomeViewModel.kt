@@ -1,4 +1,4 @@
-package com.hfad.doodad.model
+package com.hfad.doodad.ui.homeFrag
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,11 +6,12 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.hfad.doodad.R
 import com.hfad.doodad.dataLayer.TaskRepository
+import com.hfad.doodad.model.Event
 import com.hfad.doodad.util.CONSTANTS.ADD_EDIT_RESULT_OK
 import com.hfad.doodad.util.CONSTANTS.DELETE_RESULT_OK
 import com.hfad.doodad.util.CONSTANTS.EDIT_RESULT_OK
 
-class HomeViewModel(handle: SavedStateHandle, repository: TaskRepository) : ViewModel()
+class HomeViewModel( handle: SavedStateHandle, repository: TaskRepository) : ViewModel()
 {
     private var resultMessageShown: Boolean = false
 
@@ -18,7 +19,7 @@ class HomeViewModel(handle: SavedStateHandle, repository: TaskRepository) : View
     private val _snackText = MutableLiveData<Event<Int>>()
     val snackText: LiveData<Event<Int>> = _snackText
 
-    private var _eventNavigateToDetail : MutableLiveData<Event< Int >> = MutableLiveData()
+    private var _eventNavigateToDetail : MutableLiveData<Event<Int>> = MutableLiveData()
     val eventNavigateToDetail = _eventNavigateToDetail
 
     private var _eventAddTask = MutableLiveData<Event<Unit>>()

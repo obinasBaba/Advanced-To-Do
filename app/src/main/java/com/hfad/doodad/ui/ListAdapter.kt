@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hfad.doodad.dataLayer.database.Task
 import com.hfad.doodad.databinding.TaskRowBinding
-import com.hfad.doodad.model.HomeViewModel
+import com.hfad.doodad.ui.homeFrag.HomeViewModel
 
 class ListAdapter( private val viewModel: HomeViewModel) : ListAdapter<Task, com.hfad.doodad.ui.ListAdapter.TaskViewHolder>(
     DIFF_UTIL

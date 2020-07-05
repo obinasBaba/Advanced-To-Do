@@ -1,4 +1,4 @@
-<layout
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     >
@@ -9,53 +9,45 @@
             type="com.hfad.doodad.dataLayer.database.Task" />
         <variable
             name="viewModel"
-            type="com.hfad.doodad.model.HomeViewModel" />
+            type="com.hfad.doodad.ui.homeFrag.HomeViewModel" />
     </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="@{() -> viewModel.navigateToDetail(task.id)}"
         >
 
 
-        <EditText
+        <TextView
             android:id="@+id/title"
             style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="?attr/actionBarSize"
             android:layout_marginStart="32dp"
             android:layout_marginTop="37dp"
-            android:layout_marginEnd="32dp"
-            android:autofillHints="Body"
-            android:hint="Body"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:autofillHints=""
+            android:background="#E4E2E6"
+            android:textColor="#100223"
+            android:textSize="40sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/body"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="HardcodedText" />
 
-        <EditText
+        <TextView
             android:id="@+id/body"
             style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="37dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="32dp"
-            android:autofillHints=""
-            android:background="#E4E2E6"
-            android:hint="Title"
-            android:inputType="text"
-            android:textColor="#100223"
-            android:textSize="40sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/title"
+            app:layout_constraintTop_toBottomOf="@+id/title"
             tools:ignore="HardcodedText" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

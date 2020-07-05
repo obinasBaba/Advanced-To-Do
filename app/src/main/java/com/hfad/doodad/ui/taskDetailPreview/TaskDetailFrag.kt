@@ -1,4 +1,4 @@
-package com.hfad.doodad.ui
+package com.hfad.doodad.ui.taskDetailPreview
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
