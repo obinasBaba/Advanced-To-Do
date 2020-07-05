@@ -15,9 +15,6 @@ import com.hfad.doodad.R
 import com.hfad.doodad.databinding.FragmentTaskHomeBinding
 import com.hfad.doodad.model.EventObserver
 import com.hfad.doodad.ui.ListAdapter
-import com.hfad.doodad.ui.TaskFragmentHomeArgs
-import com.hfad.doodad.ui.TaskFragmentHomeDirections
-
 import com.hfad.doodad.util.getViewModelFactory
 import com.hfad.doodad.util.showSnackBar
 

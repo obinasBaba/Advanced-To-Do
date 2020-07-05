@@ -1,22 +1,18 @@
 package com.hfad.doodad.ui.editAdd
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.hfad.doodad.R
 import com.hfad.doodad.dataLayer.TaskRepository
 import com.hfad.doodad.dataLayer.database.Task
 import com.hfad.doodad.model.Event
-import com.hfad.doodad.model.Result
 import com.hfad.doodad.model.Result.*
 import kotlinx.coroutines.launch
 import java.lang.ArithmeticException
-import kotlin.system.exitProcess
 
 class EditAddViewModel(private val repository: TaskRepository ) : ViewModel()
 {
 
+    private var isNewTask: Boolean = false
     var taskId : Int? = null
 
     private val _isLoading = MutableLiveData<Boolean>()
@@ -25,16 +21,22 @@ class EditAddViewModel(private val repository: TaskRepository ) : ViewModel()
     private val _loaded = MutableLiveData<Boolean>()
     val loaded: LiveData< Boolean> = _loaded
 
-//    var task = MutableLiveData<Task>()
     var originalTask = Task()
+    var taskToModify = MediatorLiveData< Task >().apply {
+//        addSource(_title){
+//            value?.title = it
+//        }
+//
+//        addSource(_body){
+//            value?.description = it
+//        }
+    }
 
-    val _title = MutableLiveData<String>( )
-    val title: LiveData< String > = _title
+    //for TwoWay dataBinding
+    val title = MutableLiveData<String>( )
+    val body = MutableLiveData<String>( )
 
-    val _body = MutableLiveData<String>( )
-    val body: LiveData< String > = _body
-
-    val _snackText = MutableLiveData<Event<Int>>( )
+    private val _snackText = MutableLiveData<Event<Int>>( )
     val snackText: LiveData< Event<Int> > = _snackText
 
 
@@ -45,6 +47,7 @@ class EditAddViewModel(private val repository: TaskRepository ) : ViewModel()
 
         this.taskId = taskId
         if (taskId == null){
+            isNewTask = true
             return
         }
 
@@ -52,12 +55,14 @@ class EditAddViewModel(private val repository: TaskRepository ) : ViewModel()
             return
         }
 
+        isNewTask = false
         _isLoading.value = true
         viewModelScope.launch {
             repository.getTaskWithId(taskId).let {
                if ( it is Success ) {
-                   _title.value = it.data.title
-                   _body.value = it.data.description
+                   title.value = it.data.title
+                   body.value = it.data.description
+                   originalTask = it.data
                    _loaded.value = true
                }else{
                    throw ArithmeticException("no datatata")
@@ -71,21 +76,12 @@ class EditAddViewModel(private val repository: TaskRepository ) : ViewModel()
 
     }
 
-    fun updateTitle() : (String) -> Unit = { s -> _title.value = s }
-
-    fun onTitleChange(  ) : (text: CharSequence?,
-                             start: Int,
-                             count: Int,
-                             after: Int ) -> Unit =
-        { text, _, _, _ ->
-            _title.value =  text.toString()
-        }
-
 
     fun onDoneClicked(){
        if (isTaskEmpty())
            _snackText.value = Event(R.string.empty_task_message)
+
     }
 
-    private fun isTaskEmpty() = (title.value?.isEmpty() ?: false) and ( body.value?.isEmpty() ?: false )
+    private fun isTaskEmpty() = (title.value?.isEmpty() ?: true) or ( body.value?.isEmpty() ?: true)
 }

@@ -8,10 +8,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.hfad.doodad.R
 import com.hfad.doodad.dataLayer.database.Task
 import com.hfad.doodad.databinding.FragmentAddEditTaskBinding
 import com.hfad.doodad.util.getViewModelFactory
+import com.hfad.doodad.util.showSnackBar
 
 class AddEditTaskFragment : Fragment() {
 
@@ -33,6 +35,6 @@ class AddEditTaskFragment : Fragment() {
     }
 
     private fun setUpSnackBar() {
-        TODO("Not yet implemented")
+        requireView().showSnackBar(this, viewModel.snackText, Snackbar.LENGTH_SHORT)
     }
 }
