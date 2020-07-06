@@ -8,10 +8,14 @@ import com.hfad.doodad.dataLayer.database.Task
 import com.hfad.doodad.dataLayer.database.TaskDao
 import com.hfad.doodad.model.Result
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
 
 class LocalDataSource(private val dataBase : TaskDao ) : TaskRepository{
+    override suspend fun refreshTasks()  {
+        delay(3000)
+    }
 
     override fun observeAll(): LiveData<Result<List<Task>>> {
         return dataBase.observeAll().map {
@@ -62,7 +66,7 @@ class LocalDataSource(private val dataBase : TaskDao ) : TaskRepository{
 
     }
 
-    override suspend fun insertTask(task: Task) {
+    override suspend fun saveTask(task: Task) {
 
     }
 

@@ -7,6 +7,8 @@ import com.hfad.doodad.model.Result
 /** gate way to dataLayer */
 interface TaskRepository {
 
+    suspend fun refreshTasks()
+
     fun observeAll(): LiveData<Result<List<Task>>>
 
     fun observeTask(taskId: Int): LiveData<Result<Task>>
@@ -23,7 +25,7 @@ interface TaskRepository {
 
     suspend fun updateTask(task: Task)
 
-    suspend fun insertTask(task: Task)
+    suspend fun saveTask(task: Task)
 
     suspend fun deleteTask(task: Task)
 }

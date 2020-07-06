@@ -22,15 +22,7 @@ class EditAddViewModel(private val repository: TaskRepository ) : ViewModel()
     val loaded: LiveData< Boolean> = _loaded
 
     var originalTask = Task()
-    var taskToModify = MediatorLiveData< Task >().apply {
-//        addSource(_title){
-//            value?.title = it
-//        }
-//
-//        addSource(_body){
-//            value?.description = it
-//        }
-    }
+    var taskToModify = MediatorLiveData< Task >()
 
     //for TwoWay dataBinding
     val title = MutableLiveData<String>( )
@@ -47,6 +39,9 @@ class EditAddViewModel(private val repository: TaskRepository ) : ViewModel()
 
         this.taskId = taskId
         if (taskId == null){
+           if (taskToModify.value == null){
+               taskToModify.value = Task()
+           }
             isNewTask = true
             return
         }
@@ -55,7 +50,6 @@ class EditAddViewModel(private val repository: TaskRepository ) : ViewModel()
             return
         }
 
-        isNewTask = false
         _isLoading.value = true
         viewModelScope.launch {
             repository.getTaskWithId(taskId).let {
@@ -63,6 +57,7 @@ class EditAddViewModel(private val repository: TaskRepository ) : ViewModel()
                    title.value = it.data.title
                    body.value = it.data.description
                    originalTask = it.data
+                   taskToModify.value = originalTask.copy()
                    _loaded.value = true
                }else{
                    throw ArithmeticException("no datatata")
@@ -75,7 +70,6 @@ class EditAddViewModel(private val repository: TaskRepository ) : ViewModel()
     fun addTask(){
 
     }
-
 
     fun onDoneClicked(){
        if (isTaskEmpty())

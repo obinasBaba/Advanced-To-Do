@@ -4,8 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hfad.doodad.dataLayer.database.Task
 import com.hfad.doodad.model.Result
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 abstract class RemoteDataSource : TaskRepository{
+
+    override fun refreshTasks() {
+        //TODO Change the scope
+        GlobalScope.launch {
+            delay(3000)
+        }
+    }
 
     private val dummyLiveData1 = MutableLiveData<Result<Task>>()
         private val dummyLiveData2 = Result.Loading
@@ -34,7 +44,7 @@ abstract class RemoteDataSource : TaskRepository{
 
     override suspend fun updateTask(task: Task) {}
 
-    override suspend fun insertTask(task: Task) {}
+    override suspend fun saveTask(task: Task) {}
 
     override suspend fun deleteTask(task: Task) {}
 }

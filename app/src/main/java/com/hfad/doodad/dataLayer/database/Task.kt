@@ -10,4 +10,8 @@ data class Task(
     @ColumnInfo var title: String = "",
     var description: String = "",
     val completed: Boolean = false
-)
+){
+
+    fun isActive() = !completed
+    fun isFinish() = completed
+}
