@@ -7,10 +7,11 @@ import com.hfad.doodad.model.Result
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
-abstract class RemoteDataSource : TaskRepository{
+ class RemoteDataSource : TaskRepository{
 
-    override fun refreshTasks() {
+    override suspend fun refreshTasks() {
         //TODO Change the scope
         GlobalScope.launch {
             delay(3000)
@@ -21,6 +22,8 @@ abstract class RemoteDataSource : TaskRepository{
         private val dummyLiveData2 = Result.Loading
 
     override fun observeAll(): LiveData<Result<List<Task>>> {
+
+
        return MutableLiveData(dummyLiveData2)
     }
 

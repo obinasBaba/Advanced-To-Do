@@ -1,5 +1,9 @@
 package com.hfad.doodad.ui.homeFrag
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.widget.Toast
 import androidx.lifecycle.*
 import com.hfad.doodad.R
 import com.hfad.doodad.dataLayer.TaskRepository
@@ -17,7 +21,28 @@ import kotlinx.coroutines.launch
 // Used to save the current filtering in SavedStateHandle.
 const val TASKS_FILTER_SAVED_STATE_KEY = "TASKS_FILTER_SAVED_STATE_KEY"
 
+
 class HomeViewModel(private val savedState: SavedStateHandle, repository: TaskRepository) : ViewModel() {
+
+    private val _currentFilteringLabel = MutableLiveData<Int>()
+    val currentFilteringLabel: LiveData<Int> = _currentFilteringLabel
+
+    private var resultMessageShown: Boolean = false
+    val isDataLoadingError = MutableLiveData< Boolean>()
+
+    private val _isDataLoading = MutableLiveData<Boolean>()
+    val isDataLoading: LiveData<Boolean> = _isDataLoading
+
+    private val _snackText = MutableLiveData<Event<Int>>()
+    val snackText: LiveData<Event<Int>> = _snackText
+
+    private var _eventNavigateToDetail : MutableLiveData<Event<Int>> = MutableLiveData()
+    val eventNavigateToDetail = _eventNavigateToDetail
+
+    private var _eventAddTask = MutableLiveData<Event<Unit>>()
+    val eventAddTask = _eventAddTask
+
+    private val _updateRequired = MutableLiveData<Boolean>(false)
 
     init {
         setFiltering( getSavedFilterType() )
@@ -55,27 +80,7 @@ class HomeViewModel(private val savedState: SavedStateHandle, repository: TaskRe
     }
 
 
-    private var resultMessageShown: Boolean = false
-    val isDataLoadingError = MutableLiveData< Boolean>()
-
-    private val _isDataLoading = MutableLiveData<Boolean>()
-    val isDataLoading: LiveData<Boolean> = _isDataLoading
-
-    private val _snackText = MutableLiveData<Event<Int>>()
-    val snackText: LiveData<Event<Int>> = _snackText
-
-    private var _eventNavigateToDetail : MutableLiveData<Event<Int>> = MutableLiveData()
-    val eventNavigateToDetail = _eventNavigateToDetail
-
-    private var _eventAddTask = MutableLiveData<Event<Unit>>()
-    val eventAddTask = _eventAddTask
-
-    private val _currentFilteringLabel = MutableLiveData<Int>()
-    val currentFilteringLabel: LiveData<Int> = _currentFilteringLabel
-
-    private val _updateRequired = MutableLiveData<Boolean>(false)
-
-    private val _items = _updateRequired.switchMap {fetch ->
+    private val _items = _updateRequired.switchMap { fetch ->
         if ( fetch ){
             _isDataLoading.value = true
             viewModelScope.launch {
@@ -90,7 +95,7 @@ class HomeViewModel(private val savedState: SavedStateHandle, repository: TaskRe
     }
     val items: LiveData<List<Task>> = _items
 
-    //called by HomeBinding
+    //called by FAB
     fun eventAddNewTask(){
         _eventAddTask.value = Event(Unit)
     }

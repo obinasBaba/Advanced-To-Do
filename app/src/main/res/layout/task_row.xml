@@ -16,9 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{() -> viewModel.navigateToDetail(task.id)}"
-        >
-
+        android:onClick="@{() -> viewModel.navigateToDetail(task.id)}">
 
         <TextView
             android:id="@+id/title"

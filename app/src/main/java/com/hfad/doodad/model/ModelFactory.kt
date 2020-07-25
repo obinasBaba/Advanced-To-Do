@@ -10,7 +10,8 @@ import com.hfad.doodad.ui.homeFrag.HomeViewModel
 import java.lang.IllegalArgumentException
 
 @Suppress("UNCHECKED_CAST")
-class ModelFactory(owner : Fragment,private val repository: TaskRepository) : AbstractSavedStateViewModelFactory( owner, null )
+class ModelFactory(owner : Fragment, private val repository: TaskRepository) :
+    AbstractSavedStateViewModelFactory( owner, null )
 {
     override fun <T : ViewModel?> create(key: String, modelClass: Class<T>, handle: SavedStateHandle): T {
 

@@ -30,9 +30,8 @@ interface TaskDao
     @Update
     suspend fun updateTask(task: Task)
 
-    @Insert
-    suspend fun insertTask(task: Task)
-
     @Delete
     suspend fun deleteTask(task: Task)
+
+
 }

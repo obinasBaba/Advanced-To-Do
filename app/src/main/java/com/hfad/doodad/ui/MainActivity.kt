@@ -37,16 +37,17 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController,appBarConfiguration)
         navigationView.setupWithNavController(navController)
 
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
         return item.onNavDestinationSelected( navController ) || super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
 
 }
 

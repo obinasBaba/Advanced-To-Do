@@ -8,7 +8,4 @@ class ToDoApplication : Application() {
     val taskRepository
     get() = ServiceLocator.provideTasksRepository(this)
 
-    override fun onCreate() {
-        super.onCreate()
-    }
 }

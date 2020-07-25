@@ -7,14 +7,17 @@ import com.hfad.doodad.model.Result.Success
 import com.hfad.doodad.dataLayer.database.Task
 import com.hfad.doodad.dataLayer.database.TaskDao
 import com.hfad.doodad.model.Result
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
 class LocalDataSource(private val dataBase : TaskDao ) : TaskRepository{
+
     override suspend fun refreshTasks()  {
-        delay(3000)
+
     }
 
     override fun observeAll(): LiveData<Result<List<Task>>> {
@@ -38,21 +41,18 @@ class LocalDataSource(private val dataBase : TaskDao ) : TaskRepository{
     }
 
     override suspend fun getTaskWithId(taskId: Int): Result<Task> = withContext(IO){
-        try{
+        try {
             val task = dataBase.getTaskWithId(taskId)
-            return@withContext if ( task != null ) {
-                 Success(task)
-            }else {
-                Error(Exception("Task not found"))
-            }
-        }catch ( e :  Exception){
+            return@withContext if (task != null) Success(task) else Error(Exception("Task Not Found"))
+        }catch (e: Exception){
             return@withContext Error(e)
         }
     }
 
-    override suspend fun deleteTask(taskId: Int) {
-
-    }
+    override suspend fun deleteTask(taskId: Int)
+      =  withContext(IO){
+            dataBase.deleteTask(taskId)
+        }
 
     override suspend fun deleteTaskWithId(taskId: Int) {
 
@@ -66,11 +66,11 @@ class LocalDataSource(private val dataBase : TaskDao ) : TaskRepository{
 
     }
 
-    override suspend fun saveTask(task: Task) {
+    override suspend fun saveTask(task: Task)   = withContext(IO){
 
     }
 
-    override suspend fun deleteTask(task: Task) {
-
+    override suspend fun deleteTask(task: Task) = withContext(IO){
+        dataBase.deleteTask(task)
     }
 }

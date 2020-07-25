@@ -1,15 +1,15 @@
 package com.hfad.doodad.model
 
 sealed class Result<out T> {
-    data class Success<T>(val data: T) : Result<T>()
-    data class Error(val errorMsg: Exception) : Result<Nothing>()
-    object Loading : Result<Nothing>()
+    data class Success<T>(val data: T) : Result<T>() // with data
+    data class Error(val errorMsg: Exception) : Result<Nothing>() //only with error MSG
+    object Loading : Result<Nothing>() // Just a Marker
 
     override fun toString(): String {
-        return when (this) {
-            is Success -> "Success data = $data"
-            is Error -> "Error MSG = $errorMsg"
-            is Loading -> "Loading"
+        return when(this){  // when with no elseBranch('when' is cool inside sealedClass)
+            is Success -> { "Success $data"}
+            is Error -> { "Error $errorMsg"}
+            is Loading -> { "Is Loading..."}
         }
     }
 }
