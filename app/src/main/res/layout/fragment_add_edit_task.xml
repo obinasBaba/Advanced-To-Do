@@ -48,7 +48,7 @@
                     android:text="@={viewmodel.body}"
                     android:layout_marginTop="4dp"
                     android:hint="@string/description_hint"
-                    android:inputType="text"
+                    android:imeOptions="flagNoExtractUi"
                     android:autofillHints="" />
 
             </LinearLayout>
@@ -64,5 +64,6 @@
             android:onClick="@{() -> viewmodel.onDoneClicked()}"
             app:layout_anchor="@id/refresh_layout"
             app:layout_anchorGravity="bottom|right|end" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

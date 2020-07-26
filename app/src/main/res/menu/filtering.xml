@@ -3,12 +3,12 @@
 
     <item
         android:id="@+id/all"
-        android:title="All" />
+        android:title="@string/label_all" />
     <item
         android:id="@+id/finished"
-        android:title="Finished" />
+        android:title="@string/label_completed" />
     <item
         android:id="@+id/unfinished"
-        android:title="UnFinished" />
+        android:title="@string/label_active" />
 
 </menu>

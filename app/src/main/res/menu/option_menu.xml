@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/filter_option"
+        android:icon="@drawable/ic_filter_list"
+        android:title="@string/menu_filter"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/refresh"
+        android:title="@string/refresh" />
+    <item
+        android:id="@+id/clear"
+        android:title="@string/menu_clear" />
+
+</menu>

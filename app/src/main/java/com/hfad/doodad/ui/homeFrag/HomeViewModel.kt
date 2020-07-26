@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.lifecycle.*
 import com.hfad.doodad.R
 import com.hfad.doodad.dataLayer.TaskRepository
@@ -22,7 +23,7 @@ import kotlinx.coroutines.launch
 const val TASKS_FILTER_SAVED_STATE_KEY = "TASKS_FILTER_SAVED_STATE_KEY"
 
 
-class HomeViewModel(private val savedState: SavedStateHandle, repository: TaskRepository) : ViewModel() {
+class HomeViewModel(private val savedState: SavedStateHandle,private val repository: TaskRepository) : ViewModel() {
 
     private val _currentFilteringLabel = MutableLiveData<Int>()
     val currentFilteringLabel: LiveData<Int> = _currentFilteringLabel
@@ -44,12 +45,28 @@ class HomeViewModel(private val savedState: SavedStateHandle, repository: TaskRe
 
     private val _updateRequired = MutableLiveData<Boolean>(false)
 
+    private val _items = _updateRequired.switchMap { fetch ->
+        if ( fetch ){
+            _isDataLoading.value = true
+            viewModelScope.launch {
+                repository.refreshTasks()
+            }
+            _isDataLoading.value = false
+        }
+
+        repository.observeAll().distinctUntilChanged().switchMap {
+            filterTasks(it)
+        }
+    }
+
+    val items: LiveData<List<Task>> = _items
+
     init {
         setFiltering( getSavedFilterType() )
         loadData(true)
     }
 
-    private fun setFiltering(type: TaskFilterType) {
+    fun setFiltering(type: TaskFilterType) {
         when(type) {
             ALL_TASKS -> {
                 setFilter(
@@ -71,29 +88,13 @@ class HomeViewModel(private val savedState: SavedStateHandle, repository: TaskRe
         loadData(false)
     }
 
-    private fun setFilter(labelCompleted: Int) {
+    fun setFilter(@StringRes labelCompleted: Int) {
         _currentFilteringLabel.value = labelCompleted
     }
 
     private fun loadData(refresh: Boolean) {
         _updateRequired.value = refresh
     }
-
-
-    private val _items = _updateRequired.switchMap { fetch ->
-        if ( fetch ){
-            _isDataLoading.value = true
-            viewModelScope.launch {
-                repository.refreshTasks()
-            }
-            _isDataLoading.value = false
-        }
-
-        repository.observeAll().distinctUntilChanged().switchMap {
-            filterTasks(it)
-        }
-    }
-    val items: LiveData<List<Task>> = _items
 
     //called by FAB
     fun eventAddNewTask(){
@@ -139,15 +140,9 @@ class HomeViewModel(private val savedState: SavedStateHandle, repository: TaskRe
         val tasksToShow = ArrayList<Task>()
         for (task in rawTasks ) {
             when(type) {
-                ALL_TASKS -> {
-                    tasksToShow.add(task)
-                }
-                COMPLETED -> {
-                    if (task.isFinish()) tasksToShow.add(task)
-                }
-                UNCOMPLETED -> {
-                    if (task.isActive()) tasksToShow.add(task)
-                }
+                ALL_TASKS -> { tasksToShow.add(task) }
+                COMPLETED -> { if (task.isFinish()) tasksToShow.add(task) }
+                UNCOMPLETED -> { if (task.isActive()) tasksToShow.add(task) }
             }
         }
         return tasksToShow
@@ -155,5 +150,14 @@ class HomeViewModel(private val savedState: SavedStateHandle, repository: TaskRe
 
     private fun getSavedFilterType(   ) =
         savedState.get<TaskFilterType>( TASKS_FILTER_SAVED_STATE_KEY ) ?: ALL_TASKS
+
+    fun clearCompletedTasks() {
+        viewModelScope.launch {
+            if (repository.clearCompleted() > 0)
+                showSnackbarMessage(R.string.completed_tasks_cleared)
+            else
+                showSnackbarMessage(R.string.no_tasks_active)
+        }
+    }
 
 }

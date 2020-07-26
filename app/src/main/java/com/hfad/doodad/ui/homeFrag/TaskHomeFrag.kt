@@ -3,6 +3,7 @@ package com.hfad.doodad.ui.homeFrag
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.widget.PopupMenu
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,7 +13,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.hfad.doodad.R
 import com.hfad.doodad.databinding.FragmentTaskHomeBinding
 import com.hfad.doodad.model.EventObserver
-import com.hfad.doodad.ui.ListAdapter
+import com.hfad.doodad.model.TaskFilterType
+import com.hfad.doodad.ui.TaskAdapter
 import com.hfad.doodad.util.getViewModelFactory
 import com.hfad.doodad.util.showSnackBar
 
@@ -22,13 +24,13 @@ class TaskFragmentHome : Fragment() {
 
     private val viewModel : HomeViewModel by viewModels( {this}, {getViewModelFactory()} )
     private lateinit var binding : FragmentTaskHomeBinding
-    private lateinit var listAdapter : ListAdapter
+    private lateinit var taskAdapter : TaskAdapter
     private val args : TaskFragmentHomeArgs by navArgs()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-
+        setHasOptionsMenu(true)
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_task_home, container, false)
         return binding.root
@@ -46,8 +48,8 @@ class TaskFragmentHome : Fragment() {
     private fun setUpListAdapter() {
         val viewModel = binding.viewModel
         viewModel?.let { VM ->
-            listAdapter = ListAdapter(VM)
-            binding.taskList.adapter = listAdapter
+            taskAdapter = TaskAdapter(VM)
+            binding.taskList.adapter = taskAdapter
         }
     }
 
@@ -78,7 +80,46 @@ class TaskFragmentHome : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.filtering, menu)
+        inflater.inflate(R.menu.option_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.filter_option -> {
+            showPopup()
+            true
+        }
+        R.id.clear -> {
+            viewModel.clearCompletedTasks()
+            true
+        }
+        R.id.refresh -> {
+            true
+        }
+
+        else -> false
+    }
+
+
+    private fun showPopup() {
+        val view = requireActivity().findViewById<View>(R.id.filter_option)
+        PopupMenu(requireContext(), view ).run {
+            setOnMenuItemClickListener {
+                when(it.itemId){
+                    R.id.all -> {
+                        viewModel.setFiltering(TaskFilterType.COMPLETED)
+                    }
+                    R.id.unfinished -> {
+                        viewModel.setFiltering(TaskFilterType.UNCOMPLETED)
+                    }
+                    R.id.finished -> {
+                        viewModel.setFiltering(TaskFilterType.COMPLETED)
+                    }
+                }
+                true
+            }
+            inflate(R.menu.filtering)
+            show()
+        }
     }
 
 }

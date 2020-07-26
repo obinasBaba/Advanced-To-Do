@@ -49,5 +49,7 @@ import java.lang.Exception
 
     override suspend fun saveTask(task: Task) {}
 
-    override suspend fun deleteTask(task: Task) {}
+     override suspend fun clearCompleted() = 0
+
+     override suspend fun deleteTask(task: Task) {}
 }

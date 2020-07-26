@@ -51,4 +51,8 @@ class DefaultRepository(private val remote : TaskRepository, private val local :
          return local.saveTask(task)
     }
 
+    override suspend fun clearCompleted() : Int{
+        return local.clearCompleted()
+    }
+
 }

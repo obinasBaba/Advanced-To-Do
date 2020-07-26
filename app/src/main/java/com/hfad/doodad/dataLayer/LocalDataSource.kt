@@ -70,6 +70,10 @@ class LocalDataSource(private val dataBase : TaskDao ) : TaskRepository{
 
     }
 
+    override suspend fun clearCompleted() = withContext(IO){
+        dataBase.clearCompleted()
+    }
+
     override suspend fun deleteTask(task: Task) = withContext(IO){
         dataBase.deleteTask(task)
     }
