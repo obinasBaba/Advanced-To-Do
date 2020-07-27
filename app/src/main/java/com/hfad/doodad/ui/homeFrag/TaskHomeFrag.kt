@@ -7,6 +7,7 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
@@ -44,6 +45,10 @@ class TaskFragmentHome : Fragment() {
         setUpListAdapter()
         setUpSnackBar()
         setUpNavigation()
+
+        viewModel.items.observe(this, Observer {
+            taskAdapter.submitList(it)
+        })
     }
     private fun setUpListAdapter() {
         val viewModel = binding.viewModel
@@ -95,7 +100,6 @@ class TaskFragmentHome : Fragment() {
         R.id.refresh -> {
             true
         }
-
         else -> false
     }
 

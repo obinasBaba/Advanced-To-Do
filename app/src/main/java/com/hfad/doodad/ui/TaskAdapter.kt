@@ -9,9 +9,12 @@ import com.hfad.doodad.dataLayer.database.Task
 import com.hfad.doodad.databinding.TaskRowBinding
 import com.hfad.doodad.ui.homeFrag.HomeViewModel
 
-class TaskAdapter(private val viewModel: HomeViewModel) : ListAdapter<Task, com.hfad.doodad.ui.TaskAdapter.TaskViewHolder>(
+class TaskAdapter(private val viewModel: HomeViewModel) : ListAdapter<Task, TaskAdapter.TaskViewHolder>(
     DIFF_UTIL
 ) {
+    init {
+
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
       return TaskViewHolder.from(parent)
@@ -22,7 +25,8 @@ class TaskAdapter(private val viewModel: HomeViewModel) : ListAdapter<Task, com.
         holder.bind(task, viewModel )
     }
 
-    class TaskViewHolder private constructor(private val binding: TaskRowBinding) : RecyclerView.ViewHolder(binding.root) {
+    class TaskViewHolder private constructor(private val binding: TaskRowBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(task: Task, viewModel: HomeViewModel){
             binding.task = task

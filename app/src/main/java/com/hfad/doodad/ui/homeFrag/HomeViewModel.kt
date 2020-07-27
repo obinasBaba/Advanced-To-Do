@@ -18,12 +18,32 @@ import com.hfad.doodad.util.CONSTANTS.ADD_EDIT_RESULT_OK
 import com.hfad.doodad.util.CONSTANTS.DELETE_RESULT_OK
 import com.hfad.doodad.util.CONSTANTS.EDIT_RESULT_OK
 import kotlinx.coroutines.launch
+import kotlin.system.exitProcess
 
 // Used to save the current filtering in SavedStateHandle.
 const val TASKS_FILTER_SAVED_STATE_KEY = "TASKS_FILTER_SAVED_STATE_KEY"
 
 
 class HomeViewModel(private val savedState: SavedStateHandle,private val repository: TaskRepository) : ViewModel() {
+
+    private val _updateRequired = MutableLiveData<Boolean>(false)
+
+    private val _items = _updateRequired.switchMap { fetch ->
+
+        if ( fetch ){
+            _isDataLoading.value = true
+            viewModelScope.launch {
+                repository.refreshTasks()
+            }
+            _isDataLoading.value = false
+        }
+
+        repository.observeAll().distinctUntilChanged().switchMap {
+            filterTasks(it)
+        }
+    }
+
+    val items: LiveData<List<Task>> = _items
 
     private val _currentFilteringLabel = MutableLiveData<Int>()
     val currentFilteringLabel: LiveData<Int> = _currentFilteringLabel
@@ -43,27 +63,14 @@ class HomeViewModel(private val savedState: SavedStateHandle,private val reposit
     private var _eventAddTask = MutableLiveData<Event<Unit>>()
     val eventAddTask = _eventAddTask
 
-    private val _updateRequired = MutableLiveData<Boolean>(false)
-
-    private val _items = _updateRequired.switchMap { fetch ->
-        if ( fetch ){
-            _isDataLoading.value = true
-            viewModelScope.launch {
-                repository.refreshTasks()
-            }
-            _isDataLoading.value = false
-        }
-
-        repository.observeAll().distinctUntilChanged().switchMap {
-            filterTasks(it)
-        }
-    }
-
-    val items: LiveData<List<Task>> = _items
-
     init {
         setFiltering( getSavedFilterType() )
         loadData(true)
+        count()
+    }
+
+    fun count() = viewModelScope.launch {
+        val a = repository.count()
     }
 
     fun setFiltering(type: TaskFilterType) {

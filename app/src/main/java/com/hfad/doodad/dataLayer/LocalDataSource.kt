@@ -62,16 +62,20 @@ class LocalDataSource(private val dataBase : TaskDao ) : TaskRepository{
 
     }
 
-    override suspend fun updateTask(task: Task) {
-
+    override suspend fun updateTask(task: Task) = withContext(IO){
+        dataBase.updateTask(task)
     }
 
     override suspend fun saveTask(task: Task)   = withContext(IO){
-
+        dataBase.insertTask(task)
     }
 
     override suspend fun clearCompleted() = withContext(IO){
         dataBase.clearCompleted()
+    }
+
+    override suspend fun count(): Int = withContext(IO){
+        dataBase.count()
     }
 
     override suspend fun deleteTask(task: Task) = withContext(IO){

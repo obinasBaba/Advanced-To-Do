@@ -55,4 +55,8 @@ class DefaultRepository(private val remote : TaskRepository, private val local :
         return local.clearCompleted()
     }
 
+    override suspend fun count(): Int {
+        return local.count()
+    }
+
 }

@@ -18,33 +18,36 @@
         android:layout_height="wrap_content"
         android:onClick="@{() -> viewModel.navigateToDetail(task.id)}">
 
+        <CheckBox
+            android:gravity="center"
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/title"
             style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="37dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:autofillHints=""
             android:background="#E4E2E6"
+            android:text="@{task.title}"
             android:textColor="#100223"
             android:textSize="40sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/checkbox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/checkbox"
+            app:layout_constraintTop_toTopOf="@+id/checkbox"
             tools:ignore="HardcodedText" />
 
-        <TextView
-            android:id="@+id/body"
-            style="@style/MaterialAlertDialog.MaterialComponents.Title.Panel"
-            android:layout_width="0dp"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/title"
-            app:layout_constraintTop_toBottomOf="@+id/title"
-            tools:ignore="HardcodedText" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

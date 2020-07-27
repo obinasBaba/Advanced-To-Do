@@ -51,5 +51,7 @@ import java.lang.Exception
 
      override suspend fun clearCompleted() = 0
 
+     override suspend fun count(): Int  = 0
+
      override suspend fun deleteTask(task: Task) {}
 }

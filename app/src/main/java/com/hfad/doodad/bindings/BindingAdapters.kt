@@ -14,5 +14,5 @@ fun showLoading( view: ProgressBar, boolean: Boolean ){
 
 @BindingAdapter("app:items")
 fun items(view: RecyclerView, tasks: List<Task>? ){
-    (view.adapter as TaskAdapter).submitList(tasks)
+//    (view.adapter as TaskAdapter).submitList(tasks)
 }

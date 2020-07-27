@@ -19,39 +19,43 @@
             android:layout_height="match_parent"
             android:id="@+id/refresh_layout">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:padding="15dp"
-                android:layout_height="wrap_content">
+           <ScrollView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:orientation="vertical"
+                   android:padding="15dp"
+                   android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/add_task_title_edit_text"
-                    android:background="#E3DFE8"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:hint="@string/title_hint"
-                    android:maxLines="1"
+                   <EditText
+                       android:id="@+id/add_task_title_edit_text"
+                       android:background="#E3DFE8"
+                       android:layout_width="match_parent"
+                       android:layout_height="?attr/actionBarSize"
+                       android:hint="@string/title_hint"
+                       android:maxLines="1"
 
-                    android:text="@={viewmodel.title}"
-                    android:textStyle="bold"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:autofillHints=""
-                    android:inputType="textAutoComplete" />
+                       android:text="@={viewmodel.title}"
+                       android:textStyle="bold"
+                       android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                       android:autofillHints=""
+                       android:inputType="textAutoComplete" />
 
-                <EditText
-                    android:id="@+id/add_task_description_edit_text"
-                    android:background="#8DE1E1E1"
-                    android:layout_width="match_parent"
-                    android:layout_height="350dp"
-                    android:gravity="top"
-                    android:text="@={viewmodel.body}"
-                    android:layout_marginTop="4dp"
-                    android:hint="@string/description_hint"
-                    android:imeOptions="flagNoExtractUi"
-                    android:autofillHints="" />
+                   <EditText
+                       android:id="@+id/add_task_description_edit_text"
+                       android:background="#8DE1E1E1"
+                       android:layout_width="match_parent"
+                       android:layout_height="350dp"
+                       android:gravity="top"
+                       android:text="@={viewmodel.description}"
+                       android:layout_marginTop="4dp"
+                       android:hint="@string/description_hint"
+                       android:imeOptions="flagNoExtractUi"
+                       android:autofillHints="" />
 
-            </LinearLayout>
+               </LinearLayout>
+           </ScrollView>
         </com.hfad.doodad.ui.SwipeToRefresh>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

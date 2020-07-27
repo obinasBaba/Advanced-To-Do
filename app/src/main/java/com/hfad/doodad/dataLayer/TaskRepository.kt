@@ -30,4 +30,6 @@ interface TaskRepository {
     suspend fun deleteTask(task: Task)
 
     suspend fun clearCompleted() : Int
+
+    suspend fun count() : Int
 }
