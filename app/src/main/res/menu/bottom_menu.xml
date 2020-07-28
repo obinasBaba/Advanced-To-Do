@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/tasks"
+        android:title="Tasks" />
+
+    <item
+        android:id="@+id/events"
+        android:title="Events" />
+
+    <item
+        android:id="@+id/setting"
+        android:title="Setting" />
+
+</menu>

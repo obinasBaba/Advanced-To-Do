@@ -1,15 +1,17 @@
 package com.hfad.doodad.ui
 
-import android.app.Activity
 import android.os.Bundle
-import android.view.MenuItem
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 import com.google.android.material.navigation.NavigationView
 import com.hfad.doodad.R
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,36 +20,59 @@ class MainActivity : AppCompatActivity() {
   private lateinit var navigationView : NavigationView
   private lateinit var appBarConfiguration : AppBarConfiguration
 
+    val viewModel: MainViewModel by viewModels()
+
+    private lateinit var currentNavController : MutableLiveData<NavController>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(findViewById(R.id.toolbar))
 
 
-        navController = findNavController(R.id.navHostFragment)
-         drawerLayout = findViewById (R.id.drawer_layout)
-         navigationView = findViewById (R.id.navigation_view)
-
-
-        appBarConfiguration = AppBarConfiguration.Builder(
-            R.id.taskFragmentHome,
-            R.id.taskStatisticsFrag
-        ).setOpenableLayout(drawerLayout) .build()
-
-        setupActionBarWithNavController(navController,appBarConfiguration)
-        navigationView.setupWithNavController(navController)
-
+        if (savedInstanceState == null )
+            setUp()
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        return item.onNavDestinationSelected( navController ) || super.onOptionsItemSelected(item)
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        setUp()
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    private fun setUp() {
+        val graphList = listOf(
+            R.navigation.tasks,
+            R.navigation.events,
+            R.navigation.setting
+        )
+
+        currentNavController = bottomNavigationView.setUpWithBottomNavigation(
+            graphList,
+            supportFragmentManager,
+            viewModel.backStack
+        )
+
+        currentNavController.observe(this, Observer {
+            Toast.makeText(this, "Controller Changed", Toast.LENGTH_SHORT).show()
+        })
     }
+
+
+    override fun onBackPressed() {
+        if (isAtStartDestination())
+        {
+            return
+        }else{
+            viewModel.backStack.popBackStack()?.let {
+                bottomNavigationView.selectedItemId = it
+            } ?:
+            super.onBackPressed()
+        }
+    }
+
+    private fun isAtStartDestination(): Boolean =
+        currentNavController.value!!.navigateUp()
+
 
 }
 

@@ -36,6 +36,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/filter_label"
             app:items="@{viewModel.items}"
+
             />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

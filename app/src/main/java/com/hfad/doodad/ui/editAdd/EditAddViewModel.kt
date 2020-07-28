@@ -53,7 +53,7 @@ class EditAddViewModel(private val repository: TaskRepository ) : ViewModel()
             return
         }
 
-        //not new( there is selected task to display )
+        //not new( there is selected tasks to display )
         //preventing accessing repo again if loaded already
         if (loaded.value == true){
             return
@@ -86,7 +86,7 @@ class EditAddViewModel(private val repository: TaskRepository ) : ViewModel()
 
     private fun updateTask() = viewModelScope.launch{
         if (isNewTask){
-            throw RuntimeException("updateTask() canceld because it is new task")
+            throw RuntimeException("updateTask() canceld because it is new tasks")
         }else{
             repository.saveTask(taskToModify.value!!)
             _signOff.value = Event(Unit)

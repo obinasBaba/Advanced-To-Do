@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/events"
+    app:startDestination="@id/eventOne">
+
+    <fragment
+        android:id="@+id/eventOne"
+        android:name="com.hfad.doodad.ui.events.EventOne"
+        android:label="fragment_event_one"
+        tools:layout="@layout/fragment_event_one" >
+        <action
+            android:id="@+id/action_eventOne_to_eventTwo"
+            app:destination="@id/eventTwo" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventTwo"
+        android:name="com.hfad.doodad.ui.events.EventTwo"
+        android:label="fragment_event_two"
+        tools:layout="@layout/fragment_event_two" />
+</navigation>

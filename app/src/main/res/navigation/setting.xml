@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setting"
+    app:startDestination="@id/settingOne">
+
+    <fragment
+        android:id="@+id/settingOne"
+        android:name="com.hfad.doodad.SettingOne"
+        android:label="fragment_setting_one"
+        tools:layout="@layout/fragment_setting_one" >
+        <action
+            android:id="@+id/action_settingOne_to_settingTwo"
+            app:destination="@id/settingTwo" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingTwo"
+        android:name="com.hfad.doodad.SettingTwo"
+        android:label="fragment_setting_two"
+        tools:layout="@layout/fragment_setting_two" />
+</navigation>

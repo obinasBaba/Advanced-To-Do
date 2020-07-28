@@ -28,6 +28,8 @@ class TaskAdapter(private val viewModel: HomeViewModel) : ListAdapter<Task, Task
     class TaskViewHolder private constructor(private val binding: TaskRowBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+
+
         fun bind(task: Task, viewModel: HomeViewModel){
             binding.task = task
             binding.viewModel = viewModel
