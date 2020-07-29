@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tasks"
-    app:startDestination="@id/taskFragmentHome">
+    app:startDestination="@id/paggerHome">
 
     <fragment
         android:id="@+id/taskDetailFrag"
@@ -50,4 +50,19 @@
             app:argType="string"
             app:nullable="true" />
     </fragment>
+    <fragment
+        android:id="@+id/paggerHome"
+        android:name="com.hfad.doodad.PagerHome"
+        android:label="fragment_pagger_home"
+        tools:layout="@layout/fragment_pagger_home" />
+    <fragment
+        android:id="@+id/taskListFragment"
+        android:name="com.hfad.doodad.TaskListFragment"
+        android:label="fragment_task_list"
+        tools:layout="@layout/fragment_task_list" />
+    <fragment
+        android:id="@+id/tagListFragment"
+        android:name="com.hfad.doodad.TagListFragment"
+        android:label="fragment_tag_list"
+        tools:layout="@layout/fragment_tag_list" />
 </navigation>
