@@ -66,5 +66,10 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
+    //section RV
+    implementation 'com.cruxlab:sectionedrecyclerview:1.0.2'
+
+    implementation 'com.github.halysongoncalves:pugnotification:1.8.1'
+
 
 }

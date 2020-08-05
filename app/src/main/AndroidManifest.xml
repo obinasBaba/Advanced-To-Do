@@ -17,6 +17,10 @@
             </intent-filter>
         </activity>
 
+        <service android:name=".ui.setting.MyService" >
+
+        </service>
+
     </application>
 
 </manifest>

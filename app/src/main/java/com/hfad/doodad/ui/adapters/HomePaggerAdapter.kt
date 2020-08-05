@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.hfad.doodad.TagListFragment
 import com.hfad.doodad.TaskListFragment
+import com.hfad.doodad.ui.events.EventOne
 import java.lang.IllegalArgumentException
 
 const val TASK_LIST_PAGE_INDEX = 0

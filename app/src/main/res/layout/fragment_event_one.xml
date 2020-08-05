@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.cruxlab.sectionedrecyclerview.lib.SectionHeaderLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:id="@+id/viewGroup"
-    android:layout_height="match_parent"
-    tools:context=".ui.events.EventOne">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/section_header_layout"
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    android:layout_height="match_parent"
+    tools:context=".ui.events.EventOne"
+
+    >
+
+
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:id="@+id/rv_id"
+        />
 
-        android:textSize="40sp"
-        android:text="EventOne" />
-
-</FrameLayout>
+</com.cruxlab.sectionedrecyclerview.lib.SectionHeaderLayout>

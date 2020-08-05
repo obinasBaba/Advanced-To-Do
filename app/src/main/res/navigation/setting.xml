@@ -7,16 +7,23 @@
 
     <fragment
         android:id="@+id/settingOne"
-        android:name="com.hfad.doodad.SettingOne"
+        android:name="com.hfad.doodad.ui.setting.SettingOne"
         android:label="fragment_setting_one"
         tools:layout="@layout/fragment_setting_one" >
         <action
             android:id="@+id/action_settingOne_to_settingTwo"
             app:destination="@id/settingTwo" />
+        <action
+            android:id="@+id/action_settingOne_to_timePickerVoo"
+            app:destination="@id/timePickerVoo" />
     </fragment>
     <fragment
         android:id="@+id/settingTwo"
-        android:name="com.hfad.doodad.SettingTwo"
+        android:name="com.hfad.doodad.ui.setting.SettingTwo"
         android:label="fragment_setting_two"
         tools:layout="@layout/fragment_setting_two" />
+    <fragment
+        android:id="@+id/timePickerVoo"
+        android:name="com.hfad.doodad.ui.setting.TimePickerVoo"
+        android:label="TimePickerVoo" />
 </navigation>

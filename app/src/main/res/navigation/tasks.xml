@@ -59,7 +59,11 @@
         android:id="@+id/taskListFragment"
         android:name="com.hfad.doodad.TaskListFragment"
         android:label="fragment_task_list"
-        tools:layout="@layout/fragment_task_list" />
+        tools:layout="@layout/fragment_task_list" >
+        <action
+            android:id="@+id/action_taskListFragment_to_taskFragmentHome"
+            app:destination="@id/taskFragmentHome" />
+    </fragment>
     <fragment
         android:id="@+id/tagListFragment"
         android:name="com.hfad.doodad.TagListFragment"
